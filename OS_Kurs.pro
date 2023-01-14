@@ -16,12 +16,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    controller/DispetcherControl/dispetchercontrol.cpp \
     main.cpp \
     mainwindow.cpp \
+    model/DispetcherModel/dispetchermodel.cpp \
+    model/DispetcherModel/proclist.cpp \
     view/Dispetcher/dispetcher.cpp
 
 HEADERS += \
+    controller/DispetcherControl/dispetchercontrol.h \
     mainwindow.h \
+    model/DispetcherModel/dispetchermodel.h \
+    model/DispetcherModel/proclist.h \
     view/Dispetcher/dispetcher.h
 
 FORMS += \
