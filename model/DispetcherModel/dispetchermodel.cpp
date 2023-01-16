@@ -54,6 +54,7 @@ QMap<QString,QStringList> DispetcherModel::get_proc_info()
         proc_starttime.append(info["Start time"]);
         proc_priory.append(info["Priory"]);
         proc_name.append(info["Name"]);
+        proc_memory.append((info["VmData"]) + " Kb");
 
 
     }
@@ -69,7 +70,7 @@ QMap<QString,QStringList> DispetcherModel::get_proc_info()
     process_info.insert("PPID",proc_ppid);
     process_info.insert("Start time",proc_starttime);
     process_info.insert("Priory",proc_priory);
-//    qDebug()<<"func"<<process_info["Name"];
+    qDebug()<<"func"<<process_info["VmData"];
     return process_info;
 
 }
@@ -226,42 +227,6 @@ void DispetcherModel::kill_process(QString PID)
 }
 
 
-/// ---------------------------------------------------------------
-///        Kill process group
-/// ---------------------------------------------------------------
-void DispetcherModel::kill_proc_tree(QString PID)
-{
-    errno = 0;
-    pid_t pid=PID.toInt();
-        int  killReturn = killpg( pid, SIGKILL);  // Kill child process group
-        if(killReturn == -1)
-        {
-            if( errno == ESRCH)      // pid does not exist
-            {
-               qDebug() << "Group does not exist!" << endl;
-            }
-            else if( errno == EPERM) // No permission to send signal
-            {
-               qDebug() << "No permission to send signal!" << endl;
-            }
-            else
-               qDebug()<< "Signal sent. All Ok!" << endl;
-        }
-}
-
-
-/// ---------------------------------------------------------------
-///        Create process
-/// ---------------------------------------------------------------
-void DispetcherModel::create_process(QString path)
-{
-    QUrl url;
-    url.setPath(path);
-    QDesktopServices::openUrl(url);
-}
-
-
-
 void DispetcherModel::create_proc_dump(QString PID)
 {
 
@@ -332,7 +297,7 @@ QMap<QString,QString> DispetcherModel::get_process_info(double& vm_usage, double
 //   qDebug()<<CPU;
 
    long page_size_kb = sysconf(_SC_PAGE_SIZE) / 1024; // in case x86-64 is configured to use 2MB pages
-   vm_usage     = (vsize/1024.0);
+   vm_usage     = (vsize/1024.0)/1024.0;
    resident_set = rss * page_size_kb;
 
    QMap<QString,QString> info;
@@ -340,6 +305,7 @@ QMap<QString,QString> DispetcherModel::get_process_info(double& vm_usage, double
    info.insert("Priory",QString::fromLocal8Bit(priority.c_str()));
    info.insert("Start time",QString::number(((starttime/100)/60)));
    info.insert("Name",QString::fromLocal8Bit(comm.c_str()));
+   info.insert("VmData", QString::number(vm_usage));
 
    return info;
 }

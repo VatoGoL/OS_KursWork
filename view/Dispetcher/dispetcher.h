@@ -34,10 +34,6 @@ private slots:
     void on_Delete_clicked();
     void timer_slot();
 
-    void on_Add_clicked();
-
-    void on_Delete_something_clicked();
-
 private:
     Ui::Dispetcher *ui;
     // список свойств диспечера задач

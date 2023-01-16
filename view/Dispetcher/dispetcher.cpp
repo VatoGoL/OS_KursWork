@@ -11,26 +11,26 @@ Dispetcher::Dispetcher(QWidget *parent) :
 {
     ui->setupUi(this);
     taskmgr_func=new DispetcherModel();
-    features<<"Name"<<"PID"<<"PPID"<<"User"<<"Start time"<<"Priory"<<"Status"<<"Memory"<<"Path";
+    features<<"Name"<<"PID"<<"PPID"<<"Start time"<<"Priory"<<"Status"<<"Memory"<<"Path";
     status_puncts<<"Uptime"<<"Total RAM"<<"Free RAM"<<"CPU";
-    qDebug() << features;
-    qDebug() << status_puncts;
+    //qDebug() << features;
+    //qDebug() << status_puncts;
 
     active_features=features;
     // model for proc table
     model = new QStandardItemModel;
 
     // fill proc table
-    qDebug() << 0;
+    //qDebug() << 0;
     Dispetcher::fill_proc_table();
-    qDebug() << 1;
+    //qDebug() << 1;
     Dispetcher::fill_status_bar();
-    qDebug() << 2;
+    //qDebug() << 2;
 
     SelectRow=0;
 
     connect(&timer,SIGNAL(timeout()),this,SLOT(timer_slot()));
-    timer.start(10000);
+    timer.start(1000);
 
 }
 
@@ -39,11 +39,11 @@ Dispetcher::Dispetcher(QWidget *parent) :
 /// ---------------------------------------------------------------
 void Dispetcher::timer_slot()
 {
-    qDebug() << 20;
+    //qDebug() << 20;
     refresh_proc_table();
-    qDebug() << 21;
+    //qDebug() << 21;
     refresh_status_bar();
-    qDebug() << 23;
+    //qDebug() << 23;
 }
 
 ///----------------------------------------------------------------
@@ -66,7 +66,7 @@ void Dispetcher::fill_proc_table()
     {
         horizontalHeader.append(active_punct);
     }
-    qDebug() << 12;
+    //qDebug() << 12;
 
     model->setHorizontalHeaderLabels(horizontalHeader);
     qDebug() << 13;
@@ -78,6 +78,7 @@ void Dispetcher::fill_proc_table()
         j=0;
         foreach(QString str,proc_info[active_punct])
         {
+            qDebug() << proc_info[active_punct];
             item = new QStandardItem(str);
             item->setEditable(0); // lock items
             model->setItem(j, i, item);
@@ -111,7 +112,7 @@ void Dispetcher::fill_status_bar()
 
 
     qDebug() << 30;
-    QString Status_string="Process count: "+QString::number(proc_info["PID"].length()+1)+"   |   ";
+    QString Status_string="Process count: "+QString::number(proc_info["PID"].length())+"   |   ";
     foreach(QString status_punct,status_puncts)
     {
         Status_string+=status_punct+":"+status_bar_info[status_punct]+"   |   ";
@@ -139,14 +140,23 @@ void Dispetcher::refresh_proc_table()
     int i=0,j;
     RowCount=proc_info["PID"].length();
     qDebug()<<"RowCount"<<RowCount;
-    foreach(QString active_punct,active_features)
+    for (int t = 0; t < active_features.size(); t++)
     {
+        QString active_punct = active_features[t];
         j=0;
-        foreach(QString str,proc_info[active_punct])
+        for(int l = 0; l < proc_info[active_punct].size(); l++)
         {
+            QString str = proc_info[active_punct][l];
             // Добавление новое ячейки, если создался процесс
-            if(j>RowCount)//if(j>=RowCount-1)
+            if(j<=RowCount -1)//if(j>=RowCount-1)
             {
+                qDebug()<<j<<i;
+                model->item(j, i)->setData(str,Qt::DisplayRole);
+            }
+            // Обновление значения старой ячейки
+            else
+            {
+
                 item = new QStandardItem(str);
                 item->setEditable(0); // lock items
                 model->setItem(j,i, item);
@@ -154,11 +164,7 @@ void Dispetcher::refresh_proc_table()
                 if(RowCount<j) RowCount=j;//j+1;
                 qDebug() << 42;
             }
-            // Обновление значения старой ячейки
-            else
-//                qDebug()<<j<<i;
-                model->item(j, i)->setData(str,Qt::DisplayRole);
-            qDebug() << 43;
+            //qDebug() << 43;
 
             // счетчик строк
             j++;
@@ -205,7 +211,7 @@ void Dispetcher::refresh_status_bar()
     QMap<QString,QString> status_bar_info=taskmgr_func->status_info();
 
 //    QString Status_string="";
-    QString Status_string="Process count: "+QString::number(proc_info["PID"].length()+1)+"   |   ";
+    QString Status_string="Process count: "+QString::number(proc_info["PID"].length())+"   |   ";
     foreach(QString status_punct,status_puncts)
     {
         Status_string+=status_punct+": "+status_bar_info[status_punct]+"   |   ";
@@ -226,31 +232,7 @@ void Dispetcher::on_Delete_clicked()
     QString PID=proc_info["PID"][SelectRow];
     taskmgr_func->kill_process(PID);
 }
-///----------------------------------------------------------------
-///        Create proc click
-/// ---------------------------------------------------------------
-void Dispetcher::on_Add_clicked()
-{
-    bool bOk;
-    QString proc_path = QInputDialog::getText( 0,"Input","Name:",QLineEdit::Normal,"",&bOk);
 
-    if (bOk)
-    {
-        taskmgr_func->create_process(proc_path);
-    }
-
-    else qDebug()<<"Create: not found exe";
-}
-///----------------------------------------------------------------
-///        Kill proc group click
-/// ---------------------------------------------------------------
-void Dispetcher::on_Delete_something_clicked()
-{
-    if(!SelectRow) return;
-
-    QString PID=proc_info["PID"][SelectRow];
-    taskmgr_func->kill_proc_tree(PID);
-}
 
 Dispetcher::~Dispetcher()
 {

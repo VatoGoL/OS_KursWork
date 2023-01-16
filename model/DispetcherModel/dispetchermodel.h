@@ -1,6 +1,8 @@
 #ifndef DISPETCHERMODEL_H
 #define DISPETCHERMODEL_H
 
+#include <cstddef>
+#include <cstdint>
 #include <QDebug>
 #include <QMessageBox>
 #include <QDesktopServices>
@@ -21,11 +23,12 @@
 #include <ctype.h>
 #include <locale.h>
 #include <signal.h>
-#include <cstddef>
 #include "proclist.h"
 #include <sys/sysinfo.h>
 #include <sys/types.h>
 #include <dirent.h>
+
+#include <libio.h>
 
 
 class DispetcherModel
@@ -36,12 +39,7 @@ public:
 
     virtual void kill_process(QString PID);
 
-    virtual void create_process(QString proc_name);
-
-
     virtual void create_proc_dump(QString PID);
-
-    virtual void kill_proc_tree(QString PID);
 
     virtual QMap<QString,QString> status_info();
 
