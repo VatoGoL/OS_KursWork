@@ -45,6 +45,7 @@ void Dispetcher::timer_slot()
     //refresh_proc_table();
     //qDebug() << 21;
     refresh_status_bar();
+    ui->tableView->scrollToBottom();
     //qDebug() << 23;
 }
 
