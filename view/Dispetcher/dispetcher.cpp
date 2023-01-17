@@ -30,7 +30,7 @@ Dispetcher::Dispetcher(QWidget *parent) :
     SelectRow=0;
 
     connect(&timer,SIGNAL(timeout()),this,SLOT(timer_slot()));
-    timer.start(1000);
+    timer.start(10000);
 
 }
 
@@ -40,7 +40,9 @@ Dispetcher::Dispetcher(QWidget *parent) :
 void Dispetcher::timer_slot()
 {
     //qDebug() << 20;
-    refresh_proc_table();
+    model->clear();
+    fill_proc_table();
+    //refresh_proc_table();
     //qDebug() << 21;
     refresh_status_bar();
     //qDebug() << 23;
@@ -55,6 +57,7 @@ void Dispetcher::fill_proc_table()
 
     //Заголовки столбцов
     QStringList horizontalHeader;
+    proc_info.clear();
 
     qDebug() << 10;
     proc_info=taskmgr_func->get_proc_info();
@@ -78,7 +81,7 @@ void Dispetcher::fill_proc_table()
         j=0;
         foreach(QString str,proc_info[active_punct])
         {
-            qDebug() << proc_info[active_punct];
+            //qDebug() << proc_info[active_punct];
             item = new QStandardItem(str);
             item->setEditable(0); // lock items
             model->setItem(j, i, item);
@@ -132,7 +135,7 @@ void Dispetcher::refresh_proc_table()
 {
     qDebug() << 40;
     QStandardItem *item;
-    proc_info["Name"].clear();
+    //proc_info["Name"].clear();
     proc_info.clear();
 
     proc_info=taskmgr_func->get_proc_info();
