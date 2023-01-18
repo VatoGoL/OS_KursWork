@@ -16,16 +16,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    controller/ControllerElfParser/ControllerElfParser.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    model/ModelElfParser/ModelElfParser.cpp \
+    view/ViewElfParser/ViewElfParser.cpp
 
 HEADERS += \
-    mainwindow.h
+    controller/ControllerElfParser/ControllerElfParser.h \
+    mainwindow.h \
+    model/ModelElfParser/ModelElfParser.h \
+    view/ViewElfParser/ViewElfParser.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    view/ViewElfParser/ViewElfParser.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    elfsources.qrc

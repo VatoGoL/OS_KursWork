@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.3, 2023-01-12T14:58:06. -->
+<!-- Written by QtCreator 4.12.3, 2023-01-19T00:27:25. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -306,8 +306,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/vato/Desktop/OS_Kurs/OS_KursWork/OS_Kurs/OS_Kurs.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/vato/Desktop/OS_Kurs/OS_KursWork/OS_Kurs/OS_Kurs.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">OS_Kurs2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/vato/Desktops/Desktop1/OS_Kurs/OS_KursWork/OS_Kurs.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/vato/Desktops/Desktop1/OS_Kurs/OS_KursWork/OS_Kurs.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

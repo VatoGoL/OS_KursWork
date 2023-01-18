@@ -1,0 +1,4 @@
+3
+0 Неверная кодировка данных
+1 little endian
+2 big endian

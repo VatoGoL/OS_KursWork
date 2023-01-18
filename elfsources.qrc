@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>controller/ControllerElfParser/elf_header_e_ident_class.txt</file>
+        <file>controller/ControllerElfParser/elf_header_e_ident_data.txt</file>
+        <file>controller/ControllerElfParser/elf_header_e_ident_os_abi.txt</file>
+        <file>controller/ControllerElfParser/elf_header_e_machine.txt</file>
+        <file>controller/ControllerElfParser/elf_header_e_type.txt</file>
+        <file>controller/ControllerElfParser/elf_header_e_version.txt</file>
+        <file>controller/ControllerElfParser/elf_ph_p_flags.txt</file>
+        <file>controller/ControllerElfParser/elf_ph_p_type.txt</file>
+        <file>controller/ControllerElfParser/elf_sh_flags.txt</file>
+        <file>controller/ControllerElfParser/elf_sh_type.txt</file>
+    </qresource>
+</RCC>

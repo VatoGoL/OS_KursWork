@@ -1,0 +1,15 @@
+14
+0 UNIX System V ABI
+1 HP-UX
+2 NetBSD
+3 Object uses GNU ELF extensions
+6 Sun Solaris
+7 IBM AIX
+8 SGI Irix
+9 FreeBSD
+10 Compaq TRU64 UNIX
+11 Novell Modesto
+12 OpenBSD
+64 ARM EABI
+97 ARM
+255 Standalone (embedded) application
