@@ -60,9 +60,7 @@ private:
     int RowCount;
 
     void fill_proc_table();
-    void refresh_proc_table();
     void fill_status_bar();
-    void refresh_status_bar();
 
     QStringList status_puncts;
     QStringList active_features;

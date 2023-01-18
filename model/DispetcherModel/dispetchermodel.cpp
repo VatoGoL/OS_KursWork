@@ -163,32 +163,6 @@ QMap<QString, QString> DispetcherModel::status_info()
 /// ---------------------------------------------------------------
 QString DispetcherModel::get_proc_path(long pid)
 {
-    /*char* name = (char*)calloc(1024,sizeof(char));
-    if(name)
-    {
-        sprintf(name, "/proc/%d/cmdline",pid);
-        FILE* f = fopen(name,"r");
-        if(f){
-            size_t size;
-            size = fread(name, sizeof(char), 1024, f);
-            if(size>0){
-                if('\n'==name[size-1])
-                    name[size-1]='\0';
-              fclose(f);
-            }
-//            fclose(f);
-        }
-    }
-
-    QString proc_name=QString::fromUtf8(name);
-    delete name;
-    return proc_name;*/
-
-//    char arg1[20];
-//    char exepath[PATH_MAX + 1] = {0};
-
-//    sprintf( arg1, "/proc/%d/exe", pid );
-//    readlink( arg1, exepath, 1024 );
 ////    qDebug()<<QString::fromUtf8(exepath);
 //    return QString::fromUtf8(exepath);
 
